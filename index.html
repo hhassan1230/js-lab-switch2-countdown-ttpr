@@ -10,6 +10,7 @@
     <title>The TTPR Switch 2 Release 2025</title>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
     <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
   </head>
 
@@ -19,6 +20,8 @@
     </div>
     <div class="coming-soon">
       <h3>Count Down:</h3>
+      <audio id="celebrateSound" src="sound/tada-fanfare-a-6313.mp3"></audio>
+      <div id="time" style="font-size: xxx-large">0</div>
     </div>
     <div id="countdown"></div>
   </body>

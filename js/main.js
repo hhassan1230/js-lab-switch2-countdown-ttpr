@@ -41,6 +41,15 @@ function CountDownToMario(endTime, divId) {
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
 
+            const div = document.getElementById(divId);
+
+            // Optional: Read date from data-release attribute (Requirement #4)
+            const target = div.dataset.release ? new Date(div.dataset.release) : end;
+          
+            // Two-digit padding helper (Requirement #2)
+            const pad = (n) => String(n).padStart(2, '0');
+          
+
   /* STEP 3: Write an inner `showRemaining()` function:
        • get current time (`new Date()`)
        • figure out the distance to launch
@@ -50,11 +59,49 @@ function CountDownToMario(endTime, divId) {
        • update `document.getElementById(divId).textContent`
   */
 
+       function showRemaining() {
+        const now = new Date();
+        const distance = target - now;
+    
+        if (distance <= 0) {
+          // Countdown finished!
+    
+          clearInterval(timer); // stop timer loop
+    
+          // STEP 3a: Flip to launch message (Requirement #3)
+          div.textContent = "Switch 2 is out! 🎉";
+
+    
+          // STEP 3b: Add launched class for style change
+          document.body.classList.add('launched');
+    
+          // STEP 3c: Optional — Play sound (Requirement #5)
+          const sound = document.getElementById('coinSound');
+          if (sound) sound.play();
+    
+          // STEP 3d: Optional — Confetti 🎊
+          if (typeof confetti === 'function') confetti();
+    
+          return;
+        }
+    
+        // STEP 3e: Breakdown time
+        const days = pad(Math.floor(distance / _day));
+        const hours = pad(Math.floor((distance % _day) / _hour));
+        const minutes = pad(Math.floor((distance % _hour) / _minute));
+        const seconds = pad(Math.floor((distance % _minute) / _second));
+    
+        // STEP 3f: Update countdown text (Requirement #1)
+        div.textContent = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
+      }
+
   /* STEP 4: Call `showRemaining()` once so the timer
             appears immediately. */
+            showRemaining();
 
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
+            const timer = setInterval(showRemaining, 1000);
 }
 
 /* ======================================================

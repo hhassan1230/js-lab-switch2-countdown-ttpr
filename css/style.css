@@ -25,6 +25,14 @@
     font-size: 30px;
 }
 
+body.launched {
+    background-color: #111;
+    color: gold;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    transition: all 0.5s ease-in;
+}  
+
 #countdown {
     text-align: center;
     font-family: 'New-Super-Mario-Font-U';

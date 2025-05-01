@@ -69,7 +69,7 @@ function CountDownToMario(endTime, divId) {
           clearInterval(timer); // stop timer loop
     
           // STEP 3a: Flip to launch message (Requirement #3)
-          div.textContent = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
+          div.textContent = "Switch 2 is out! 🎉";
 
     
           // STEP 3b: Add launched class for style change
@@ -92,7 +92,7 @@ function CountDownToMario(endTime, divId) {
         const seconds = pad(Math.floor((distance % _minute) / _second));
     
         // STEP 3f: Update countdown text (Requirement #1)
-        div.textContent = `${days} : ${hours} : ${minutes} : ${seconds}`;
+        div.textContent = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
       }
 
   /* STEP 4: Call `showRemaining()` once so the timer

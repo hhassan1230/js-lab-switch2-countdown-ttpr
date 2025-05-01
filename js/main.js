@@ -69,7 +69,8 @@ function CountDownToMario(endTime, divId) {
           clearInterval(timer); // stop timer loop
     
           // STEP 3a: Flip to launch message (Requirement #3)
-          div.textContent = "Switch 2 is out! 🎉";
+          div.textContent = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
+
     
           // STEP 3b: Add launched class for style change
           document.body.classList.add('launched');

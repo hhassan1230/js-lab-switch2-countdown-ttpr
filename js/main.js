@@ -31,6 +31,7 @@ CountDownToMario('06/05/2025 12:01 AM', 'countdown');
 function CountDownToMario(endTime, divId) {
   /* STEP 1: Convert deadline into a Date object. */
   const end = new Date(endTime);
+  //const end =  new Date(Date.now() + 3 * 1000);
 
   /* 👉 Time constants (leave these as-is): */
   const _second = 1000;
@@ -40,6 +41,7 @@ function CountDownToMario(endTime, divId) {
 
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
+  const timer = document.getElementById("time")
 
   /* STEP 3: Write an inner `showRemaining()` function:
        • get current time (`new Date()`)
@@ -49,12 +51,31 @@ function CountDownToMario(endTime, divId) {
        • pad units to two digits (see hints below)
        • update `document.getElementById(divId).textContent`
   */
+  function showRemaining() {
+    const now = new Date().getTime();
+    const distance = end - now;
+
+    let celebrate;
+    if (distance <= 0) {
+      document.body.classList.add('launched');
+      timer.innerHTML = "Switch 2 is out! 🎉";
+      let soundPlayed = false;
+      confetti();
+      document.getElementById("celebrateSound").play();
+      clearInterval(interval);
+      return;
+    } else {
+      const pad = n => String(n).padStart(2, '0');
+      timer.innerHTML = `D${pad(Math.floor(distance / _day))} H${pad(Math.floor((distance / _hour)) % 24)} M${pad(Math.floor(distance / _minute) % 60)} S${pad(Math.floor(distance / _second % 60))}`;
+    }
+  }
 
   /* STEP 4: Call `showRemaining()` once so the timer
             appears immediately. */
-
+  showRemaining();
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
+  const interval = setInterval(showRemaining, 1000);
 }
 
 /* ======================================================
@@ -76,4 +97,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in*/

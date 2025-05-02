@@ -36,7 +36,7 @@ body {
     background-color: #E41421;
 }
 
-@font-face {
-    font-family: 'superMario';
-    src: url('//koop4.github.io/super-mario-tribute/resources/font/prstart.ttf');
+body.launched {
+    background-color: black;
+    color: yellow;
 }

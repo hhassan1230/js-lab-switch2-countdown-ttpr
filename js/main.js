@@ -28,33 +28,32 @@ CountDownToMario('06/05/2025 12:01 AM', 'countdown');
  *  @param {string|Date} endTime – Launch deadline.
  *  @param {string}       divId  – id of the DOM node for text.
  */
-function CountDownToMario(endTime, divId) {
-  /* STEP 1: Convert deadline into a Date object. */
-  const end = new Date(endTime);
+    function CountDownToMario(endTime, divId) {
+    const end = new Date(endTime);
+    const _second = 1000;
+    const _minute = _second * 60;
+    const _hour   = _minute * 60;
+    const _day    = _hour * 24;
 
-  /* 👉 Time constants (leave these as-is): */
-  const _second = 1000;
-  const _minute = _second * 60;
-  const _hour   = _minute * 60;
-  const _day    = _hour * 24;
+    function showRemaining(){
+        const now = new Date(); //variable for the current date
+        const distance = end - now; //variable distance finds the difference between current time and launch date
+        if (distance <=0){ //if the distance is 0, the switch has already been released
+            clearInterval(timer); //since the distance is 0, we no longer need the timer which displays the remaining time
+            document.getElementById(divId).innerHTML="The Switch 2 is out!"; //display release message
+        }
+        else{
+            const days = Math.floor(distance/_day); //finds the dividend of distance and days
+            const hours = Math.floor((distance%_day)/_hour); //takes distance/day and finds the remainder instead of the dividend and then divides it by the number of hours
+            const minutes = Math.floor((distance%_hour)/_minute); //takes distance/hour and finds the remainder instead of the divident and then divides it by the number of minutes
+            const seconds = Math.floor((distance%_minute)/_second); //takes distance/minute and finds the remainder instead of the divident and then divides it by the number of seconds
+            document.getElementById(divId).innerHTML = `Days: ${days} Hours: ${hours} Minutes: ${minutes} Seconds: ${seconds}`; //displays the total remaining time in a string
+        }
+    }
 
-  /* STEP 2: Declare any variables you’ll need here
-            (e.g. interval id). */
-
-  /* STEP 3: Write an inner `showRemaining()` function:
-       • get current time (`new Date()`)
-       • figure out the distance to launch
-       • if distance <= 0 ⇒ clear interval & show hype msg
-       • else break distance into days / hrs / mins / secs
-       • pad units to two digits (see hints below)
-       • update `document.getElementById(divId).textContent`
-  */
-
-  /* STEP 4: Call `showRemaining()` once so the timer
-            appears immediately. */
-
-  /* STEP 5: Repeat `showRemaining()` every second
-            with `setInterval`. */
+    const timer=setInterval(()=>{ //variable that updates on an interval
+        showRemaining(); //runs the function per interval
+    }, _second); //sets the interval to be the same as a second in real time
 }
 
 /* ======================================================
@@ -76,4 +75,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in */

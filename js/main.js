@@ -40,6 +40,13 @@ function CountDownToMario(endTime, divId) {
 
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
+    let intervalId;
+    let div = document.getElementById(divId);
+    let now = new Date(); // current date
+    let distance = end - now; // distance to launch
+     //n => arrow function. takes a single parameter might be a number of a string representation of a number. padStart(2, '0') is a method that pads the string representation of the number with leading zeros until it reaches a length of 2 characters. This is useful for formatting numbers like hours, minutes, and seconds to always have two digits (e.g., "01" instead of "1"). 
+    let pad = n => String(n).padStart(2, '0'); // two-digit padding
+
 
   /* STEP 3: Write an inner `showRemaining()` function:
        • get current time (`new Date()`)
@@ -49,12 +56,38 @@ function CountDownToMario(endTime, divId) {
        • pad units to two digits (see hints below)
        • update `document.getElementById(divId).textContent`
   */
+    function showRemaining() {
+      now = new Date(); // current date
+      distance = end - now; // distance to launch
+
+      if (distance <= 0) 
+        {
+        clearInterval(intervalId);
+        div.textContent = 'LAUNCHED';
+        document.body.classList.add('launched');
+        document.getElementById('coinSound').play();
+        return;
+        }
+
+      const days    = Math.floor(distance / _day);
+      const hours   = Math.floor((distance % _day) / _hour);
+      const minutes = Math.floor((distance % _hour) / _minute);
+      const seconds = Math.floor((distance % _minute) / _second);
+
+      div.textContent = `${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+        
 
   /* STEP 4: Call `showRemaining()` once so the timer
             appears immediately. */
+    showRemaining();
+
 
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
+    intervalId = setInterval(showRemaining, _second);
+
+
 }
 
 /* ======================================================
@@ -76,4 +109,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in*/

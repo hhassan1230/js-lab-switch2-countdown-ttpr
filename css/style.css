@@ -40,3 +40,14 @@ body {
     font-family: 'superMario';
     src: url('//koop4.github.io/super-mario-tribute/resources/font/prstart.ttf');
 }
+
+.center-gif {
+
+    display: block;
+
+    margin: auto;
+
+    width: 350px;
+    height: 300px;
+
+}

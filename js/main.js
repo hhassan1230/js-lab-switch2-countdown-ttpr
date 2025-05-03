@@ -37,7 +37,7 @@ function CountDownToMario(endTime, divId) {
   const _minute = _second * 60;
   const _hour   = _minute * 60;
   const _day    = _hour * 24;
-
+  const pad = n => String(n).padStart(2, '0');
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
 
@@ -49,14 +49,35 @@ function CountDownToMario(endTime, divId) {
        • pad units to two digits (see hints below)
        • update `document.getElementById(divId).textContent`
   */
+ function showRemaining(){
+    const now = new Date();
+    const distance = end-now;
+    if(distance<=0){
+        clearInterval(timer);
+        document.getElementById(divId).innerHTML="It's MARIO Time";
+        //Toggle dark mode on launch;
+        //play sound once
+       
+        
+    } 
+    else {
+        const days=Math.floor(distance/_day);
+        const hours=Math.floor(distance % _day/_hour);
+        const seconds=Math.floor(distance % _minute/_second);
+        document.getElementById(divId).innerHTML=`Days:${pad(days)},Hours:${pad(hours)},Seconds:${pad(seconds)}`;
+        
+    }
 
+ }
+ showRemaining();
+ setInterval(showRemaining);
   /* STEP 4: Call `showRemaining()` once so the timer
             appears immediately. */
 
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
-}
 
+}
 /* ======================================================
    📌  HINTS  — uncomment / tweak as you implement
    ------------------------------------------------------
@@ -76,4 +97,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js*/

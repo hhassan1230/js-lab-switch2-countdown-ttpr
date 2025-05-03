@@ -30,7 +30,8 @@ CountDownToMario('06/05/2025 12:01 AM', 'countdown');
  */
 function CountDownToMario(endTime, divId) {
   /* STEP 1: Convert deadline into a Date object. */
-  const end = new Date(endTime);
+  const div = document.getElementById(divId);
+  const end = new Date(endTime); 
 
   /* 👉 Time constants (leave these as-is): */
   const _second = 1000;
@@ -41,6 +42,8 @@ function CountDownToMario(endTime, divId) {
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
 
+let timer;
+
   /* STEP 3: Write an inner `showRemaining()` function:
        • get current time (`new Date()`)
        • figure out the distance to launch
@@ -49,13 +52,38 @@ function CountDownToMario(endTime, divId) {
        • pad units to two digits (see hints below)
        • update `document.getElementById(divId).textContent`
   */
+function showRemaining() {
+    const now = new Date(); //get current time
+    const distance = end - now; //Time left in milliseconds
+    
+    if (distance <= 0) {
+      clearInterval(timer); // Stop the countdown
+      document.getElementById(divId).textContent = 'It’s out now!';
+      //document.body.classList.add('launched'); // Adding celebration styles
+     // document.getElementById('coinSound').play(); // Plays sound
+      
+    }
+ 
+    const days    = Math.floor(distance / _day);
+    const hours   = Math.floor((distance % _day) / _hour);
+    const minutes = Math.floor((distance % _hour) / _minute);
+    const seconds = Math.floor((distance % _minute) / _second);
 
+    const pad = (n)=> n.toString().padStart(2, '0'); // Two-digit padding helper
+
+    document.getElementById(divId).textContent =
+      `${pad(days)}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s` // Update the countdown display
+  
   /* STEP 4: Call `showRemaining()` once so the timer
-            appears immediately. */
-
+                  appears immediately. */
+}
+showRemaining();
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
+timer = setInterval(showRemaining, 1000);
+
 }
+CountDownToMario('06/05/2025 12:01 AM', 'countdown'); // Call the function to start the countdown
 
 /* ======================================================
    📌  HINTS  — uncomment / tweak as you implement
@@ -76,4 +104,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+/*   • Add a confetti explosion (see confetti.js) - Check js in */

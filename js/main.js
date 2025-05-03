@@ -38,6 +38,28 @@ function CountDownToMario(endTime, divId) {
   const _hour   = _minute * 60;
   const _day    = _hour * 24;
 
+  const pad = n => String(n).padStart(2, '0');
+
+  function showRemaining(){
+    const now = new Date();
+    const distance = end - now;
+  
+
+  if(distance <= 0){
+    clearInterval(timer);
+    document.getElementById(divId).innerHTML = "HYPE!!!";
+  }
+  else{
+    const days = Math.floor(distance/_day);
+    const hours = Math.floor(distance % _day/_hour);
+    const seconds = Math.floor(distance % _minute/_second);
+    document.getElementById(divId).innerHTML = `Days: ${pad(days)}, Hours: ${pad(hours)}, Seconds : ${pad(seconds)}`;
+
+  }
+  }
+  showRemaining();
+  setInterval(showRemaining);
+  document.getElementById('coinSound').play();
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
 
@@ -76,4 +98,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in */

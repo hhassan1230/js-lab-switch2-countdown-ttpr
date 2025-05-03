@@ -25,18 +25,45 @@ CountDownToMario('06/05/2025 12:01 AM', 'countdown');
 
 /**
  *  Builds a self-updating countdown.
- *  @param {string|Date} endTime – Launch deadline.
+ *  @param {string|Date} endTime – Launch deadline.  //string or date
  *  @param {string}       divId  – id of the DOM node for text.
  */
 function CountDownToMario(endTime, divId) {
   /* STEP 1: Convert deadline into a Date object. */
   const end = new Date(endTime);
-
+  
+    
   /* 👉 Time constants (leave these as-is): */
   const _second = 1000;
   const _minute = _second * 60;
   const _hour   = _minute * 60;
   const _day    = _hour * 24;
+
+  function showRemaining(){
+  const now = new Date();
+  const distance = end - now;
+
+  if (distance <= 0){
+    document.getElementById(divId).innerHTML = "Launched!";
+  }
+    else{
+        const days = Math.floor(distance / _day);
+
+        const hours = Math.floor((distance % _day) / _hour);
+        const minutes = Math.floor((distance % _hour) / _minute);
+        const seconds = Math.floor((distance % _minute) / _second);
+
+        document.getElementById(divId).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        
+    
+    }
+  }
+
+  timer = setInterval(() => {
+    showRemaining();
+  }, _second);
+
+}
 
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
@@ -55,7 +82,7 @@ function CountDownToMario(endTime, divId) {
 
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
-}
+
 
 /* ======================================================
    📌  HINTS  — uncomment / tweak as you implement
@@ -76,4 +103,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in */

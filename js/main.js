@@ -58,9 +58,10 @@ function CountDownToMario(endTime, divId) {
 
     // Format the countdown string (e.g., "01:04:23:09")
     const countdownText = `${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    
 
     // Update the text content of the countdown div
-    div.textContent = countdownText;
+    div.textContent = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
   }
 
   // Show the countdown immediately before the first second passes

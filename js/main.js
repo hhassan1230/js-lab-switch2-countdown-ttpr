@@ -38,6 +38,27 @@ function CountDownToMario(endTime, divId) {
   const _hour   = _minute * 60;
   const _day    = _hour * 24;
 
+function show_remainning(){
+    const now= new Date();
+    const distance = end-now;
+    if (distance<=0){
+    clearInterval(timer);
+  document.getElementById(divId).innerHTML="Happy bootcamping";}
+  else{
+    const days=Math.floor(distance/_day);
+    const remainning_hour=Math.floor((distance%_day)/_hour);
+    const remainning_minute=Math.floor((distance%_hour)/_minute);
+    const remainning_second=Math.floor((distance%_minute)/_second);
+    console.log(`Days: ${days} Hours: ${remainning_hour} Minute: ${remainning_minute} Second:${remainning_second}`);
+    document.getElementById(divId).innerHTML = `Days: ${days} Hours: ${remainning_hour} Minute: ${remainning_minute} Second:${remainning_second}`;} 
+  }
+
+const timer = setInterval(()=>{
+    show_remainning();}, _second);
+
+
+
+
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
 
@@ -76,4 +97,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in */

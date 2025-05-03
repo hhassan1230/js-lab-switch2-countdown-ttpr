@@ -23,13 +23,18 @@ Open **script.js** to see the commented TODO steps.
 
 ## Requirements
 
-| # | Feature | Pass criteria |
-|---|---------|---------------|
-| 1 | **Live countdown** | Timer updates every second (days : hrs : mins : secs). |
-| 2 | **Two-digit units** | `04 hrs` → not `4 hrs` &nbsp;`padStart()` hint included. |
-| 3 | **Launch state** | At zero: text flips to **“Switch 2 is out! 🎉”** and page style changes (background, confetti, etc.). |
-| 4 | **Dynamic date** | Timer reads `data-release` on the countdown `<div>` (no hard-coding in JS). |
-| 5 | **(Stretch)** Sound | Play `coin.wav` once on launch. |
+| # |       Feature |               | Pass criteria |
+|---|---------------|-------------------------------|
+
+| 1 | **Live countdown**            | Timer updates every second (days : hrs : mins : secs). |
+
+| 2 | **Two-digit units**           | `04 hrs` → not `4 hrs` &nbsp;`padStart()` hint included. |
+
+| 3 | **Launch state**              | At zero: text flips to **“Switch 2 is out! 🎉”** and page style changes (background, confetti, etc.). |
+
+| 4 | **Dynamic date**              | Timer reads `data-release` on the countdown `<div>` (no hard-coding in JS). |
+
+| 5 | **(Stretch)** Sound|          | Play `coin.wav` once on launch. |
 
 ---
 

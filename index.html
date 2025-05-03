@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
+    <!-- Set document character encoding -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, minimum-scale=1.0, initial-scale=1.0"
-    />
+
+    <!-- Viewport settings for responsive design on mobile -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0" />
+
+    <!-- Page title shown in browser tab -->
     <title>The TTPR Switch 2 Release 2025</title>
+
+    <!-- Link to your external CSS file -->
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+
+    <!-- Link to your external JavaScript file (defer = wait until HTML loads) -->
     <script src="js/main.js" defer></script>
+
+    <!-- Optional Apple icon for mobile home screen bookmarks -->
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
   </head>
 
   <body>
+    <!-- Logo or promotional image for the release -->
     <div class="title">
-      <img src="img/switch2imgmini.png" />
+      <img src="img/switch2imgmini.png" alt="Switch 2 Promo" />
     </div>
+
+    <!-- Countdown label -->
     <div class="coming-soon">
       <h3>Count Down:</h3>
     </div>
-    <div id="countdown"></div>
+
+    <!-- This is where the countdown timer will appear -->
+    <div id="countdown">Loading...</div>
+
+    <!-- Hidden audio element that JavaScript can play when countdown ends -->
+    <audio id="coinSound" src="audio/coin.mp3" preload="auto"></audio>
+    <!-- 🔊 NOTE: Make sure coin.mp3 exists at the correct path -->
   </body>
 </html>

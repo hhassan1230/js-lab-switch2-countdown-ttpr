@@ -1,79 +1,72 @@
 /********************************************************
- * Switch 2 Countdown — starter file (solution removed)
- * -----------------------------------------------------
- * Fill in the blanks to build a live countdown that
- * flips to a hype message once the clock hits zero.
- *
- * ✨  What’s here:
- *   • Constants for time math (ms/second, ms/minute…)
- *   • Step-by-step “TODO” comments as your guide
- *   • Handy hints at the bottom (padding, sound, etc.)
- *
- * 🛠  Your job:
- *   1. Calculate the remaining time each second.
- *   2. Update the DOM with days / hrs / mins / secs.
- *   3. Handle launch-day state (text swap, style swap,
- *      coin-sound, confetti… go wild!).
+ * Switch 2 Countdown — completed version with comments
  ********************************************************/
 
-/* ------------------------------------------------------
-   Kick off the countdown (edit date while testing).
-   The second argument is the id of the element that
-   will display the timer.
------------------------------------------------------- */
+// Kick off the countdown by calling the function
+// Pass in:
+// 1. A string representing the target date and time
+// 2. The ID of the HTML element where the countdown should display
 CountDownToMario('06/05/2025 12:01 AM', 'countdown');
 
 /**
- *  Builds a self-updating countdown.
- *  @param {string|Date} endTime – Launch deadline.
- *  @param {string}       divId  – id of the DOM node for text.
+ * Builds and starts a countdown timer that updates every second
+ * @param {string|Date} endTime - The date/time when the countdown should end
+ * @param {string} divId - The ID of the HTML element to update
  */
 function CountDownToMario(endTime, divId) {
-  /* STEP 1: Convert deadline into a Date object. */
+  // Convert the endTime string into a Date object so we can do math with it
   const end = new Date(endTime);
 
-  /* 👉 Time constants (leave these as-is): */
-  const _second = 1000;
-  const _minute = _second * 60;
-  const _hour   = _minute * 60;
-  const _day    = _hour * 24;
+  // Define constants representing time in milliseconds
+  const _second = 1000;                   // 1000 ms = 1 second
+  const _minute = _second * 60;           // 60 seconds = 1 minute
+  const _hour   = _minute * 60;           // 60 minutes = 1 hour
+  const _day    = _hour * 24;             // 24 hours = 1 day
 
-  /* STEP 2: Declare any variables you’ll need here
-            (e.g. interval id). */
+  // Cache (store) a reference to the DOM element so we can update it easily
+  const div = document.getElementById(divId);
 
-  /* STEP 3: Write an inner `showRemaining()` function:
-       • get current time (`new Date()`)
-       • figure out the distance to launch
-       • if distance <= 0 ⇒ clear interval & show hype msg
-       • else break distance into days / hrs / mins / secs
-       • pad units to two digits (see hints below)
-       • update `document.getElementById(divId).textContent`
-  */
+  // Variable to hold the interval ID returned by setInterval()
+  let timer;
 
-  /* STEP 4: Call `showRemaining()` once so the timer
-            appears immediately. */
+  // Optional helper function to pad single digits with a leading 0
+  // Example: 4 becomes "04", 12 stays "12"
+  const pad = n => String(n).padStart(2, '0');
 
-  /* STEP 5: Repeat `showRemaining()` every second
-            with `setInterval`. */
+  // This inner function will calculate and show the time remaining
+  function showRemaining() {
+    const now = new Date();          // Get the current time
+    const distance = end - now;      // Calculate the time left (in milliseconds)
+
+    // If time is up or past, trigger the launch state
+    if (distance <= 0) {
+      clearInterval(timer);          // Stop the countdown loop
+      div.textContent = "It's Mario time!"; // Replace countdown with final message
+
+      // Optional launch celebration: style the page and play a sound
+      document.body.classList.add('launched'); // Add class to body for CSS effects
+      const sound = document.getElementById('coinSound');
+      if (sound) sound.play();       // Play coin sound if it exists
+      return;                        // Exit the function early
+    }
+
+    // Break the remaining time into days/hours/minutes/seconds
+    const days = Math.floor(distance / _day);
+    const hours = Math.floor((distance % _day) / _hour);
+    const minutes = Math.floor((distance % _hour) / _minute);
+    const seconds = Math.floor((distance % _minute) / _second);
+
+    // Format the countdown string (e.g., "01:04:23:09")
+    const countdownText = `${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    
+
+    // Update the text content of the countdown div
+    div.textContent = `${days} days ${hours} hrs ${minutes} mins ${seconds} secs`;
+  }
+
+  // Show the countdown immediately before the first second passes
+  showRemaining();
+
+  // Run showRemaining() every 1 second (1000 ms) to update the timer
+  timer = setInterval(showRemaining, 1000);
 }
-
-/* ======================================================
-   📌  HINTS  — uncomment / tweak as you implement
-   ------------------------------------------------------
-   • Two-digit padding helper
-       // const pad = n => String(n).padStart(2, '0');
-
-   • Read release date from HTML
-       // const div    = document.getElementById(divId);
-       // const target = new Date(div.dataset.release);
-
-   • Celebration styles
-       // document.body.classList.add('launched');
-
-   • Play sound once
-       // document.getElementById('coinSound').play();
-====================================================== */
-/* ======================================================
-   🎉  BONUS  — optional extras
-   ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 

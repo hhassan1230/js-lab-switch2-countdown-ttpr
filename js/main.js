@@ -21,7 +21,7 @@
    The second argument is the id of the element that
    will display the timer.
 ------------------------------------------------------ */
-CountDownToMario('06/05/2025 12:01 AM', 'countdown');
+
 
 /**
  *  Builds a self-updating countdown.
@@ -30,6 +30,7 @@ CountDownToMario('06/05/2025 12:01 AM', 'countdown');
  */
 function CountDownToMario(endTime, divId) {
   /* STEP 1: Convert deadline into a Date object. */
+  const div = document.getElementById(divId);
   const end = new Date(endTime);
 
   /* 👉 Time constants (leave these as-is): */
@@ -37,6 +38,43 @@ function CountDownToMario(endTime, divId) {
   const _minute = _second * 60;
   const _hour   = _minute * 60;
   const _day    = _hour * 24;
+
+  const pad = n => String(n).padStart(2, '0');
+
+  
+
+
+  function showRemaining(){
+
+    const now = new Date();
+    const distance = end - now;
+    
+    if (distance <= 0){
+        clearInterval(timer)
+        div.textContent ="Switch 2 is available now";
+        document.body.classList.add('launched');
+        return;
+
+    
+    }
+    const days = Math.floor(distance/_day);
+    const hours = Math.floor((distance%_day)/_hour);
+    const minutes = Math.floor((distance%_hour/_minute));
+    const seconds = Math.floor((distance%_minute)/_second);
+
+    div.textContent = `${pad(days)} days  ${pad(hours)} hours  ${pad(minutes)} minutes  ${pad(seconds)} seconds`;
+
+}
+    showRemaining();
+    const timer = setInterval(showRemaining, 1000);
+
+    
+  }
+
+
+
+  CountDownToMario('06/05/2025 12:01 AM', 'countdown');
+
 
   /* STEP 2: Declare any variables you’ll need here
             (e.g. interval id). */
@@ -55,7 +93,7 @@ function CountDownToMario(endTime, divId) {
 
   /* STEP 5: Repeat `showRemaining()` every second
             with `setInterval`. */
-}
+
 
 /* ======================================================
    📌  HINTS  — uncomment / tweak as you implement
@@ -76,4 +114,4 @@ function CountDownToMario(endTime, divId) {
 /* ======================================================
    🎉  BONUS  — optional extras
    ------------------------------------------------------
-   • Add a confetti explosion (see confetti.js) - Check js in 
+   • Add a confetti explosion (see confetti.js) - Check js in */

@@ -1,6 +1,9 @@
 <p align="center">
   <img src="img/switch2.jpeg?auto=format&fit=crop&w=1200&q=80" alt="Colorful dice tumbling" width="600">
 </p>
+<p align="center">
+  <img src="img/Screenshot 2025-05-13 224831.png" alt="Colorful dice tumbling" width="600">
+</p>
 ---
 languages: javascript, html, css
 tags: dom, timers, events, beginner, kids
@@ -51,3 +54,6 @@ Open **script.js** to see the commented TODO steps.
 - [ ] Screenshot added to README.  
 
 Happy coding—set your alarms for midnight! 🌟
+
+![Description of image](img\Screenshot 2025-05-13 224831.png)
+

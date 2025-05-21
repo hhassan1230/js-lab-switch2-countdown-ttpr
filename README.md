@@ -40,6 +40,10 @@ Open **script.js** to see the commented TODO steps.
 3. Follow the numbered TODO comments—implement, save, refresh, repeat.  
 4. Commit early, push when ready, and open a Pull Request.
 
+<p align="center">
+  <img src="img/switch2CountdownScreenshot.png" width="600">
+</p>
+
 ---
 
 ## Submission checklist
